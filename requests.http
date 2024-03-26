@@ -1,9 +1,0 @@
-### Post a new product
-POST http://localhost:4000/api/products HTTP/1.1
-content-type: application/json
-
-{
-    "name": "Azúcar Marolio 1kg",
-    "price": "900.00",
-    "quantity": "50"
-}
