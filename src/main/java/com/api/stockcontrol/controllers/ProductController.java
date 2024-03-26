@@ -5,8 +5,13 @@ import com.api.stockcontrol.services.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
+import java.util.Map;
+import java.util.NoSuchElementException;
 import java.util.Optional;
 
 
@@ -31,4 +36,20 @@ public class ProductController {
     public Optional<Product> show(@PathVariable Long id) {
         return this.productService.show(id);
     }
+
+    @PutMapping(path = "/{id}")
+    public Product update(@RequestBody Product request, @PathVariable Long id) {
+        return this.productService.update(request, id);
+    }
+
+    @ExceptionHandler(NoSuchElementException.class)
+    @ResponseStatus(HttpStatus.NOT_FOUND)
+    public ResponseEntity<Map<String, String>> handleNoSuchElementException(NoSuchElementException ex) {
+        Map<String, String> responseBody = new HashMap<>();
+        responseBody.put("status", "404");
+        responseBody.put("message", "El producto que intenta actualizar no existe.");
+
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(responseBody);
+    }
+
 }
