@@ -7,7 +7,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
+import java.util.Optional;
+
 
 @RestController
 @RequestMapping("api/products")
@@ -26,4 +27,8 @@ public class ProductController {
         return this.productService.store(product);
     }
 
+    @GetMapping(path = "/{id}")
+    public Optional<Product> show(@PathVariable Long id) {
+        return this.productService.show(id);
+    }
 }
