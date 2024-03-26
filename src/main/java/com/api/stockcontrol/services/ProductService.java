@@ -8,6 +8,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.Optional;
 
 @Service
 public class ProductService {
@@ -21,6 +22,10 @@ public class ProductService {
 
     public Product store(Product product) {
         return productRepository.save(product);
+    }
+
+    public Optional<Product> show(Long id) {
+        return productRepository.findById(id);
     }
 
 }
