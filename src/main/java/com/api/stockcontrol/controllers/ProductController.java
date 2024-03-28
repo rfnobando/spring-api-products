@@ -43,12 +43,22 @@ public class ProductController {
         return this.productService.update(request, id);
     }
 
+    @DeleteMapping(path = "/{id}")
+    public ResponseEntity<Map<String, String>> delete(@PathVariable Long id) {
+        productService.delete(id);
+        Map<String, String> responseBody = new HashMap<>();
+        responseBody.put("status", "200");
+        responseBody.put("message", "El producto fue eliminado con éxito.");
+
+        return ResponseEntity.status(HttpStatus.OK).body(responseBody);
+    }
+
     @ExceptionHandler(NoSuchElementException.class)
     @ResponseStatus(HttpStatus.NOT_FOUND)
     public ResponseEntity<Map<String, String>> handleNoSuchElementException(NoSuchElementException ex) {
         Map<String, String> responseBody = new HashMap<>();
         responseBody.put("status", "404");
-        responseBody.put("message", "El producto que intenta actualizar no existe.");
+        responseBody.put("message", "El producto no existe.");
 
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(responseBody);
     }
