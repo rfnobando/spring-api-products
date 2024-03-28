@@ -40,4 +40,12 @@ public class ProductService {
         return product;
     }
 
+    public void delete(Long id) {
+        if (productRepository.existsById(id)) {
+            productRepository.deleteById(id);
+        } else {
+            throw new NoSuchElementException();
+        }
+    }
+
 }
