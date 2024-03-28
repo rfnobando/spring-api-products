@@ -8,7 +8,6 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.NoSuchElementException;
-import java.util.Optional;
 
 @Service
 public class ProductService {
@@ -24,8 +23,9 @@ public class ProductService {
         return productRepository.save(product);
     }
 
-    public Optional<Product> show(Long id) {
-        return productRepository.findById(id);
+    public Product show(Long id) {
+        return productRepository.findById(id)
+                .orElseThrow(NoSuchElementException::new);
     }
 
     public Product update(Product request, Long id) {

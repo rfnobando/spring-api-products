@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.*;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.NoSuchElementException;
-import java.util.Optional;
 
 
 @RestController
@@ -34,7 +33,7 @@ public class ProductController {
     }
 
     @GetMapping(path = "/{id}")
-    public Optional<Product> show(@PathVariable Long id) {
+    public Product show(@PathVariable Long id) {
         return this.productService.show(id);
     }
 
