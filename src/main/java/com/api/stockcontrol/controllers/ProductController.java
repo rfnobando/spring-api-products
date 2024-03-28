@@ -53,8 +53,7 @@ public class ProductController {
     }
 
     @ExceptionHandler(NoSuchElementException.class)
-    @ResponseStatus(HttpStatus.NOT_FOUND)
-    public ResponseEntity<Map<String, String>> handleNoSuchElementException(NoSuchElementException ex) {
+    public ResponseEntity<Map<String, String>> handleNoSuchElementException() {
         Map<String, String> responseBody = new HashMap<>();
         responseBody.put("status", "404");
         responseBody.put("message", "El producto no existe.");
